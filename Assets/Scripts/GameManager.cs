@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour {
         Services.EventManager = new EventManager();
         Services.TaskManager = new TaskManager();
         Services.PrefabDB = Resources.Load<PrefabDB>("Prefabs/PrefabDB");
+        Services.VotingManager = new VotingManager();
     }
 
     void InitializePlayers()

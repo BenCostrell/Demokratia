@@ -4,6 +4,17 @@ using UnityEngine;
 
 public abstract class Event {}
 
+public class PlayerVoted : Event
+{
+    public Player player;
+    public bool yea;
+    public PlayerVoted(Player pl, bool vote)
+    {
+        player = pl;
+        yea = vote;
+    }
+}
+
 public class EventManager {
 
 	public delegate void EventDelegate<T>(T e) where T: Event;

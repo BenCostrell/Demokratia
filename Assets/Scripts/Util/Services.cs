@@ -7,4 +7,5 @@ public static class Services {
 	public static GameManager GameManager { get; set; }
 	public static TaskManager TaskManager { get; set; }
     public static PrefabDB PrefabDB { get; set; }
+    public static VotingManager VotingManager { get; set; }
 }
