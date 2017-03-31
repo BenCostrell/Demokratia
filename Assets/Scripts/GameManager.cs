@@ -6,8 +6,11 @@ public class GameManager : MonoBehaviour {
     private List<Player> players;
     public Vector3[] spawnPoints;
     public Sprite[] playerSprites;
+    public float shiftTime;
+    public float yeaXPos;
+    public float nayXPos;
 
-	void Awake()
+    void Awake()
     {
         InitializeServices();
     }
@@ -15,6 +18,7 @@ public class GameManager : MonoBehaviour {
     // Use this for initialization
 	void Start () {
         InitializePlayers();
+        Services.VotingManager.StartNewVote();
 	}
 	
 	// Update is called once per frame

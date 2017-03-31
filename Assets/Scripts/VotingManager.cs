@@ -20,6 +20,8 @@ public class VotingManager {
             if (!yeaVotes.Contains(player))
             {
                 yeaVotes.Add(player);
+                PlayerShiftTask shiftYea = new PlayerShiftTask(player, true);
+                Services.TaskManager.AddTask(shiftYea);
             }
             if (nayVotes.Contains(player))
             {
@@ -31,12 +33,16 @@ public class VotingManager {
             if (!nayVotes.Contains(player))
             {
                 nayVotes.Add(player);
+                PlayerShiftTask shiftNay = new PlayerShiftTask(player, false);
+                Services.TaskManager.AddTask(shiftNay);
             }
             if (yeaVotes.Contains(player))
             {
                 yeaVotes.Remove(player);
             }
         }
+        Debug.Log("yea votes: " + yeaVotes.Count);
+        Debug.Log("nay votes: " + nayVotes.Count);
     }
 
     bool DidMotionPass()
@@ -44,7 +50,7 @@ public class VotingManager {
         return yeaVotes.Count > nayVotes.Count;
     }
 
-    void StartNewVote()
+    public void StartNewVote()
     {
         yeaVotes.Clear();
         nayVotes.Clear();
