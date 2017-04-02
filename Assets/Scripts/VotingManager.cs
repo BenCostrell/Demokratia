@@ -5,10 +5,14 @@ using UnityEngine;
 public class VotingManager {
     private List<Player> yeaVotes;
     private List<Player> nayVotes;
+    private List<NPC> npcYeaVotes;
+    private List<NPC> npcNayVotes;
 
     public VotingManager(){
         yeaVotes = new List<Player>();
         nayVotes = new List<Player>();
+        npcYeaVotes = new List<NPC>();
+        npcNayVotes = new List<NPC>();
     }
 
     void Vote(PlayerVoted e)
@@ -41,13 +45,11 @@ public class VotingManager {
                 yeaVotes.Remove(player);
             }
         }
-        Debug.Log("yea votes: " + yeaVotes.Count);
-        Debug.Log("nay votes: " + nayVotes.Count);
     }
 
     bool DidMotionPass()
     {
-        return yeaVotes.Count > nayVotes.Count;
+        return (yeaVotes.Count + npcYeaVotes.Count) > (nayVotes.Count + npcNayVotes.Count);
     }
 
     public void StartNewVote()

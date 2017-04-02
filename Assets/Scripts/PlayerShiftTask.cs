@@ -24,6 +24,7 @@ public class PlayerShiftTask : Task {
         duration = Services.GameManager.shiftTime;
         playerTransform = player.transform;
         initialPos = playerTransform.position;
+        Services.EventManager.Register<PlayerVoted>(Interrupt);
         if (votedYea)
         {
             targetPos = new Vector3(Services.GameManager.yeaXPos, initialPos.y, initialPos.z);   
@@ -48,9 +49,14 @@ public class PlayerShiftTask : Task {
 
     void Interrupt(PlayerVoted e)
     {
-        if (e.player == player)
+        if (e.player == player && e.yea != votedYea)
         {
             SetStatus(TaskStatus.Aborted);
         }
+    }
+
+    protected override void CleanUp()
+    {
+        Services.EventManager.Unregister<PlayerVoted>(Interrupt);
     }
 }
