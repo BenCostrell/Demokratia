@@ -47,6 +47,18 @@ public class VotingManager {
         }
     }
 
+    public void NPCVote(NPC npc, bool yea)
+    {
+        if (yea)
+        {
+            npcYeaVotes.Add(npc);
+        }
+        else
+        {
+            npcNayVotes.Add(npc);
+        }
+    }
+
     bool DidMotionPass()
     {
         return (yeaVotes.Count + npcYeaVotes.Count) > (nayVotes.Count + npcNayVotes.Count);
@@ -56,6 +68,8 @@ public class VotingManager {
     {
         yeaVotes.Clear();
         nayVotes.Clear();
+        npcYeaVotes.Clear();
+        npcNayVotes.Clear();
         Services.EventManager.Register<PlayerVoted>(Vote);
     }
 	
